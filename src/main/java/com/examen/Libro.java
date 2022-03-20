@@ -1,7 +1,7 @@
 package com.examen;
 
 
-public class Libro {
+public class Libro implements Pesado{
     private String titulo;
     private String genero;
     private double pesoKg;
@@ -36,5 +36,22 @@ public class Libro {
 
     public void setPesoKg(double pesoKg) {
         this.pesoKg = pesoKg;
+    }
+
+    public double getPeso(String unidadMedida) {
+        switch (unidadMedida) {
+            case "gramos":
+                    return pesoKg*1000;
+            case "miligramos":
+                    return pesoKg*1000000;
+            case "toneladas":
+                    return pesoKg/1000;
+            default:
+                throw new IllegalArgumentException("La unidad "+unidadMedida+" no está soportada");
+        }
+    }
+
+    public double getPesoGramos() {
+        return pesoKg*1000;
     }
 }
