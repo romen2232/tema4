@@ -12,7 +12,7 @@ public class Email {
     public Email(String correo) throws Exception {
         if(validarCorreo(correo)){
             int j=0;
-
+            nombreUsuario="";
             for (int i = 0; i < correo.length(); i++) {
                 if(correo.charAt(i)!='@'){
                     nombreUsuario+=correo.charAt(i);
@@ -63,11 +63,12 @@ public class Email {
     public static Email crearCorreoCorporativo(String nombre) throws Exception{
         String nombreDeUsuario="";
         boolean e=true;
-        nombre.toLowerCase();
-        for (char letra : nombre.toCharArray()) {
+        String nombreMinus= nombre.toLowerCase();
+        for (char letra : nombreMinus.toCharArray()) { 
             if(e) nombreDeUsuario+=letra;
             e=false;
             if(letra==' ') e=true;
+    
         }
 
         List<String> dominios = new ArrayList<>();
@@ -75,6 +76,8 @@ public class Email {
         dominios.add("hotmail.com");
         dominios.add("ieshlanz.es");
 
-        return new Email(nombreDeUsuario+"@"+dominios.get((new Random()).nextInt(dominios.size())));
+        String email=nombreDeUsuario+"@"+dominios.get((new Random()).nextInt(dominios.size()));
+
+        return new Email(email);
     }
 }
